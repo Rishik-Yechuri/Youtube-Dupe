@@ -5,7 +5,7 @@
   
 	let name;
 	let user;
-  
+
 	onMount(() => {
 	  auth.onAuthStateChanged((_user) => {
 		user = _user;
@@ -20,6 +20,8 @@
 	  <p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
 	{:else}
 	  <LoginPage />
+	  <p>Don't have an account?</p>
+      <button on:click={signUp}>Sign Up</button>
 	{/if}
   </main>
   
