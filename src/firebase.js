@@ -1,5 +1,6 @@
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
+import { user } from './store.js';  // import the store
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDf-zcmQxzLO1vq1zyWfokwqEJ3c_gNubI',
@@ -14,3 +15,8 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 
 export const auth = firebase.auth();
+
+// This function is called whenever the user's login state changes
+auth.onAuthStateChanged(_user => {
+  user.set(_user);
+});
