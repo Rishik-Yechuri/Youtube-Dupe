@@ -8,16 +8,47 @@
   
   async function logIn() {
     try {
-      await auth.signInWithEmailAndPassword(email, password);
+      await auth.signInWithEmailAndPassword(email, password)  .catch((error) => {
+    const errorCode = error.code;
+    //const errorMessage = error.message;
+   //alert(errorMessage)
+   errorMessage = error.message
+    // ..
+  });;
     } catch(error) {
-      console.error('Failed to sign in:', error);
-      errorMessage = error.message;
+      //alert('Failed to sign in:', error.message);
+     // errorMessage = error.message;
     }
   }
   </script>
   
   <style>
+    #login-form {
+    text-align: center;
+    padding: 1em;
  
+    margin: 0 auto;
+    background-color: blueviolet;
+  }
+
+  h2 {
+    color: blue;
+    text-transform: uppercase;
+    font-size: 4em;
+    font-weight: 100;
+  }
+  .error {
+    color: white;
+    background-color: red;
+    padding: 1em;
+    margin-top: 1em;
+  }
+  @media (min-width: 640px) {
+    #login-form {
+      max-width: none;
+      background-color: brown;
+    }
+  }
   </style>
   
   <div id="login-form">
@@ -32,6 +63,6 @@
     </div>
     <button on:click={logIn}>Log in</button>
     {#if errorMessage}
-      <div class="error">{{errorMessage}}</div>
+      <div class="error">{errorMessage}</div>
     {/if}
   </div>
