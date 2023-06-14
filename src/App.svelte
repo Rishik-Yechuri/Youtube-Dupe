@@ -3,6 +3,7 @@
 	import { onMount } from 'svelte';
 	import { user } from './store.js'; // import the store
 	import LoginPage from './LoginPage.svelte';
+    import HomePage from './HomePage.svelte';
 	
 	let name;
 	$user = null; // Initialize the user store to null
@@ -17,8 +18,7 @@
   
   <main>
 	{#if $user} <!-- Use the $ prefix to access the current value of the store -->
-	  <h1>Hello {name}!</h1>
-	  <p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
+	  <HomePage name={name}/>
 	{:else}
 	  <LoginPage />
 	{/if}
