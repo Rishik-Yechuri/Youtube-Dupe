@@ -1,39 +1,37 @@
 <script>
   import { auth } from './firebase.js';
-  import { user } from './store.js';  // import the store
-  import { fly } from 'svelte/transition';  // import the fly transition
-
+  import { fly } from 'svelte/transition';
+  
   let email = '';
   let password = '';
-  let errorMessage = '';  // this will hold the error message
-
+  let errorMessage = '';
+  
   async function logIn() {
     try {
       await auth.signInWithEmailAndPassword(email, password);
-    } catch (error) {
+    } catch(error) {
       console.error('Failed to sign in:', error);
-      errorMessage = error.message;  // display the error message
+      errorMessage = error.message;
     }
   }
-</script>
-
-<div>
-  <input type="email" bind:value={email} placeholder="Email">
-  <input type="password" bind:value={password} placeholder="Password">
-  <button on:click={logIn}>Log in</button>
-  {#if errorMessage}  <!-- display the error message if there is one -->
-    <div class="error" transition:fly="{{ y: 200, duration: 500, delay: 0}}">{errorMessage}</div>
-  {/if}
-</div>
-
-<style>
-  .error {
-    background-color: #f8d7da;
-    color: #721c24;
-    border-color: #f5c6cb;
-    padding: .75rem 1.25rem;
-    margin-bottom: 1rem;
-    border: 1px solid transparent;
-    border-radius: .25rem;
-  }
-</style>
+  </script>
+  
+  <style>
+ 
+  </style>
+  
+  <div id="login-form">
+    <h2>Login</h2>
+    <div>
+      <label for="email">Email</label>
+      <input id="email" type="email" bind:value={email} placeholder="Email">
+    </div>
+    <div>
+      <label for="password">Password</label>
+      <input id="password" type="password" bind:value={password} placeholder="Password">
+    </div>
+    <button on:click={logIn}>Log in</button>
+    {#if errorMessage}
+      <div class="error">{{errorMessage}}</div>
+    {/if}
+  </div>
